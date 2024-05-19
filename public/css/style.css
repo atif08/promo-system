@@ -1,0 +1,141 @@
+.width-80 {
+    width: 80px;
+}
+
+.width-120 {
+    width: 120px;
+}
+
+.width-200 {
+    width: 200px;
+}
+
+.width-300 {
+    width: 300px;
+}
+
+.width-400 {
+    width: 400px;
+}
+
+.width-60 {
+    width: 60px;
+}
+
+.model-xxl {
+    max-width: 1400px;
+}
+
+.nested-datatable {
+    border: 1px dashed #dddddd;
+    padding: 14px;
+    border-radius: 2px;
+    /*border-left: 4px solid #5b73e8;*/
+}
+
+.spinner .spin-icon {
+    font-size: 32px;
+    position: absolute;
+}
+
+.validation-container {
+    color: #f46a6a;
+    font-weight: bolder;
+}
+
+.vertical-center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    width: 100%;
+}
+
+.rightbar-overlay {
+    z-index: 1060;
+}
+
+.right-bar {
+    width: 330px;
+    right: -330px;
+}
+
+.dataTables_length {
+    padding-top: 8px;
+}
+
+.badge {
+    padding: 8px;
+    margin-bottom: 2px;
+}
+
+.dt-wrapper th {
+
+    /*background-color: rgba(91,115,232,.25)!important;*/
+    color:#495057;
+    font-size: 12px;
+    font-family: WorkSans-SemiBold;
+}
+
+
+/* Marketplace search */
+
+#marketplace-search input.account-search {
+    background: transparent;
+    border: none;
+    display: inline-block;
+    font-size: 14px;
+    vertical-align: middle;
+    margin-left: -5px;
+    padding: 0;
+    outline: none;
+}
+
+#marketplace-search {
+    padding: 10px 14px;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(230, 230, 230, .7);
+}
+
+.marketplace-search {
+    margin-left: 5px;
+    display: inline-block;
+    opacity: .7;
+    font-size: 14px;
+    vertical-align: middle;
+    line-height: 12px;
+}
+
+#marketplace-search input.account-search {
+    width: calc(100% - 50px);
+    line-height: 20px;
+}
+
+.marketplace-search i {
+    margin-right: 14px;
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+/* End of Marketplace Search */
+
+.p-l-52 {
+    padding-left: 52px;
+}
+
+.help-block {
+    margin-bottom: 4px;
+    margin-top: 2px;
+    font-size: 11px;
+    font-style: italic;
+    color: #545454
+}
+
+.dt-wrapper .dropdown-item {
+    padding: 7px 14px;
+}
+
+.rule-header, .rule-item {
+    border-left: 3px solid #5b73e8;
+}
