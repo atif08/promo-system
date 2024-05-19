@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 
@@ -83,7 +84,6 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-
     /**
      * The attributes that should be cast.
      *
@@ -110,6 +110,11 @@ class User extends Authenticatable
     public function isSuperAdminUser(): bool
     {
         return $this->id === 1;
+    }
+
+    public function isUserCanUsePromo(PromoCode $promoCode): bool
+    {
+       return  $this->orders()->where('promo_code_id', $promoCode->id)->count() > 0;
     }
 
 }

@@ -2,33 +2,31 @@
 
 namespace App\Actions;
 
+use AmazonSellingPartner\Exception\Exception;
 use App\Services\FlashMessage;
 use Illuminate\Support\Facades\Auth;
 
 class ValidatePromoCodeAction
 {
-    public function handle($promoCode): bool
+    public function handle($promoCode): void
     {
         // Check if promo code exists and is within date range
         if (!$promoCode) {
-            FlashMessage::error('Invalid promo code');
-            return false;
+
+            throw new Exception('Invalid promo code');
         }
 
         // Check if the promo code is within usage limits
-        if ($promoCode->usage_limit <= 0) {
-            FlashMessage::error('Promo code has reached its limit');
-            return false;
+        if ($promoCode->hasLimit()) {
+
+            throw new Exception('Promo code has reached its limit');
+
         }
 
-        $userUsageCount = Auth::user()->orders()->where('promo_code_id', $promoCode->id)->count();
+        if (request()->user()->isUserCanUsePromo($promoCode)) {
 
-        if ($userUsageCount > 0) {
-            FlashMessage::error('You already used this promo code');
-            return false;
+            throw new Exception('You already used this promo code');
         }
-
-        return true;
     }
 
 }

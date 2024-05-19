@@ -19,8 +19,13 @@ class PromoCode extends Model
      * @param  string  $value
      * @return void
      */
-    public function setPromoCodeAttribute($value)
+    public function setPromoCodeAttribute($value): void
     {
         $this->attributes['promo_code'] = strtoupper($value);
+    }
+
+    public function hasLimit(): bool
+    {
+        return $this->usage_limit <= 0;
     }
 }

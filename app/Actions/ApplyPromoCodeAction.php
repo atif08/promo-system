@@ -2,28 +2,41 @@
 
 namespace App\Actions;
 
+use AmazonSellingPartner\Exception\Exception;
 use App\Models\PromoCode;
-use Illuminate\Support\Facades\Auth;
 
 class ApplyPromoCodeAction
 {
-    public function handle(PromoCode $promoCode, float $orderTotal)
+
+    public function __construct(private readonly ValidatePromoCodeAction $validatePromoCodeAction,
+                                private readonly CalculateDiscountAction $calculateDiscountAction)
     {
-        $discountAmount = 0;
+    }
 
-        if ($promoCode->type === PromoCode::Percent) {
-            $discountAmount = ($promoCode->amount / 100) * $orderTotal;
-        } elseif ($promoCode->type === PromoCode::Flat) {
-            $discountAmount = min($promoCode->amount, $orderTotal);
+    public function handle(float $orderTotal,string $promoCodeString =null): array
+    {
+        if (!$promoCodeString) {
+            return [null,0,$orderTotal];
         }
 
-        // Check if the promo code is applied on the user's birthday
-        if (Auth::user()->dob->isToday()) {
-            $additionalDiscount = 0.1 * $discountAmount; // 10% additional discount
-            $discountAmount += $additionalDiscount;
-        }
+        $promoCode = PromoCode::where('promo_code', $promoCodeString)
+            ->where('start_date', '<=', now())
+            ->where('end_date', '>=', now())
+            ->first();
 
-        return $discountAmount;
+        /**
+         * @throws \Exception
+         */
+
+        $this->validatePromoCodeAction->handle($promoCode);
+
+        $discountAmount = $this->calculateDiscountAction->handle($promoCode, $orderTotal);
+        $orderTotal-=$discountAmount;
+
+        // Update the usage limits for the promo code
+        $promoCode->decrement('usage_limit');
+
+        return [$promoCode->id,$discountAmount,$orderTotal];
     }
 
 }

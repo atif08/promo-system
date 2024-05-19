@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\ApplyPromoCodeAction;
+use App\Actions\CalculateDiscountAction;
 use App\Actions\SaveOrderAction;
 use App\Actions\ValidatePromoCodeAction;
 use App\Http\Requests\CheckOutRequest;
