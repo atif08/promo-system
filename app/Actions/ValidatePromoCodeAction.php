@@ -3,8 +3,6 @@
 namespace App\Actions;
 
 use AmazonSellingPartner\Exception\Exception;
-use App\Services\FlashMessage;
-use Illuminate\Support\Facades\Auth;
 
 class ValidatePromoCodeAction
 {

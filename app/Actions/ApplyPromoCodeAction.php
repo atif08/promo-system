@@ -2,7 +2,6 @@
 
 namespace App\Actions;
 
-use AmazonSellingPartner\Exception\Exception;
 use App\Models\PromoCode;
 
 class ApplyPromoCodeAction
